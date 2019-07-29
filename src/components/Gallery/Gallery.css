@@ -1,0 +1,47 @@
+.gallery--wrapper {
+  margin: 1rem;
+}
+
+.gallery--list {
+  padding: 0;
+}
+
+.gallery--track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style-type: none;
+  margin: 1rem
+}
+
+.gallery--track:hover {
+  background: #444;
+}
+
+.gallery--track-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.track--album-art {
+  width: 32px;
+  height: 32px;
+  margin: 0 1rem;
+}
+
+.track--playButton {
+  width: 32px;
+  height: 32px;
+  margin: 0 1rem;
+  border: 1px #fff solid;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.track--name {
+  margin: 0 1rem;
+  font-size: 1rem;
+}
