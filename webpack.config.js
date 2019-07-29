@@ -2,19 +2,25 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({ template: './public/index.html' });
+const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({ 
+  template: './public/index.html',
+  filename: 'index.html',
+  inject: 'body'
+});
+
 const MiniCssExtractPluginConfig = new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-      ignoreOrder: false
-    })
+  filename: '[name].css',
+  chunkFilename: '[id].css',
+  ignoreOrder: false
+});
 
 
 module.exports = {
   entry: "./src/index.js",
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, 'public')
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/public/'
   },
   module: {
     rules: [

@@ -1,11 +1,22 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
-var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({ template: './public/index.html' });
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({ 
+  template: './public/index.html',
+  inject: false
+});
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    filename: "bundle.js"
+    filename: './index.js',
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'src'),
+    hot: false,
+    inline: false,
+    compress: true,
+    port: 3000
   },
   module: {
     rules: [

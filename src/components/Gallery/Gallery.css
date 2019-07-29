@@ -1,5 +1,7 @@
 .gallery--wrapper {
   margin: 1rem;
+  display: flex;
+  justify-self: center;
 }
 
 .gallery--list {
@@ -11,7 +13,7 @@
   flex-direction: row;
   align-items: center;
   list-style-type: none;
-  margin: 1rem
+  margin: 2rem 10vw;
 }
 
 .gallery--track:hover {
@@ -25,8 +27,10 @@
 }
 
 .track--album-art {
-  width: 32px;
-  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  max-width: 64px;
+  max-height: 64px;
   margin: 0 1rem;
 }
 
@@ -41,7 +45,21 @@
   justify-content: center;
 }
 
-.track--name {
+
+.track--info {
+  display: flex;
   margin: 0 1rem;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.track--name {
   font-size: 1rem;
+  text-align: left;
+}
+
+.track--artist {
+  font-size: 0.8rem;
+  color: #777;
+  text-align: left;
 }

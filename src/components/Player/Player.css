@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 /** Now Playing **/
@@ -20,11 +20,10 @@
   float: left;
   margin-right: 10px;
   text-align: right;
-  width: 45%;
 }
 .now-playing__img img {
-  max-width: 80vmin;
-  width: 100%;
+  max-height: 80%;
+  height: -webkit-fill-available;
 }
 .now-playing__side {
   width: 45%;

@@ -10,7 +10,6 @@ import './App.css';
 export const authUri = 'https://accounts.spotify.com/authorize';
 
 const clientId = '48918592cdc744e9a5dadec59fe1e2cb';
-const clientSecret = '7a64ca84bf464f00811b6aec995763e6'
 const redirectUri = 'http://localhost:3000';
 const scopes = [
   'user-read-currently-playing',
@@ -19,16 +18,21 @@ const scopes = [
   'user-read-email'
 ];
 
-const hash = window.location.hash
-  .substring(1)
-  .split('&')
-  .reduce((initial, item) => {
-    if (item) {
-      var steps = item.split('=');
-      initial[steps[0]] = decodeURIComponent(steps[1]);
-    }
-    return initial;
-  }, {});
+let hashTemp 
+window.location.hash
+  ? hashTemp = window.location.hash
+    .substring(1)
+    .split('&')
+    .reduce((initial, item) => {
+      if (item) {
+        var steps = item.split('=');
+        initial[steps[0]] = decodeURIComponent(steps[1]);
+      }
+      return initial;
+    }, {})
+  : hashTemp = '';
+
+const hash = hashTemp;
 
 window.location.hash = '';
 
@@ -58,7 +62,7 @@ class App extends Component {
   }
 
   search() {
-    const result = Spotify.search(this.state.query, this.state.token)
+    Spotify.search(this.state.query, this.state.token)
       .then(search => {
         this.handleSearch(search.data, this.state.token)})
       .catch(e => {
@@ -137,48 +141,58 @@ class App extends Component {
     return (
       <div className="App">
         <script src="https://sdk.scdn.co/spotify-player.js"></script>
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>GlassPlayer</h2>
-        </div>
         {!this.state.token && (
-          <a className='btn btn--login'
-            href=
-            {`${authUri}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join('%20')}&response_type=token&show_dialog=true`}
-          >
-            Login
-          </a>
+          <div className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h2>GlassPlayer</h2>
+            <a className='btn btn--login'
+              href=
+              {`${authUri}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join('%20')}&response_type=token&show_dialog=true`}
+            >
+              Login
+            </a>
+          </div>
         )}
         {this.state.token && (
           <div>
-            <Player
-              item={this.state.item}
-              is_playing={this.state.is_playing}
-              progress_ms={this.state.progress_ms}
-            />
-            <button 
-              className="btn playingNow--input"
-              onClick={() => this.getPlayingNow(this.state.token)}>
-              Check what is playing
-            </button>
-
-          <form onSubmit={ (e) => { e.preventDefault(); this.search(); } }>
-            <div>
-              <input 
-                className="search--input" 
-                type="text" 
-                placeholder="Search for an artist"
-                value={this.state.query}
-                onChange={event => {this.setState({query: event.target.value }) }} />
+            <div className="App-header header--logged">
+              <div className="header--logo-logged">
+                <img src={logo} className="App-logo" alt="logo" />
+                <h2>GlassPlayer</h2>
+              </div>
+              {this.state.is_playing && (
+                <Player
+                  item={this.state.item}
+                  is_playing={this.state.is_playing}
+                  progress_ms={this.state.progress_ms}
+                />
+                )}
               <button 
-                className="btn search--submit"
-                type="submit"
-              >
-                {icons.magnifyingGlass}
+                className="btn playingNow--input"
+                onClick={() => this.getPlayingNow(this.state.token)}>
+                Check what is playing
               </button>
             </div>
-          </form>
-          <Gallery tracks={this.state.tracks}/>
+            <div>
+
+            <form onSubmit={ (e) => { e.preventDefault(); this.search(); } }>
+              <div className="search--wrapper">
+                <input 
+                  className="search--input" 
+                  type="text" 
+                  placeholder="Search for an artist"
+                  value={this.state.query}
+                  onChange={event => {this.setState({query: event.target.value }) }} />
+                <button 
+                  className="btn search--submit"
+                  type="submit"
+                >
+                  {icons.magnifyingGlass}
+                </button>
+              </div>
+            </form>
+            <Gallery tracks={this.state.tracks}/>
+            </div>
           </div>
         )}
       </div>

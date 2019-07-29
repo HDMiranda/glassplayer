@@ -126,10 +126,17 @@ class Gallery extends Component {
                            onClick={() => this.handlePlayClick(track.preview_url)}>
                            {this.displayIcon(track.preview_url)}
                       </div>
-                      <span 
-                        className="track--name">
-                        {track.name}
-                      </span>
+                      <div 
+                        className="track--info">
+                        <div 
+                          className="track--name">
+                          {track.name}
+                        </div>
+                        <div 
+                          className="track--artist">
+                          {track.artists[0].name}
+                        </div>
+                      </div>
                     </div>
                     
                   </li>

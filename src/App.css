@@ -23,6 +23,17 @@
   to { transform: rotate(360deg); }
 }
 
+.header--logged {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search--wrapper {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
 .btn {
   color: #fff;
   background: #1db954;
@@ -43,13 +54,20 @@
 
 .btn--login {
   display: flex;
-  margin: 2rem auto;
+  margin: auto;
   width: fit-content;
+  font-size: 1rem;
+}
+
+.playingNow--input {
+  height: fit-content;
+  align-self: center;
 }
 
 .search--input {
   background: #777;
   color: #fff;
+  height: 1rem;
   margin: 1rem;
   margin-right: 0;
   padding: 0.5rem 0.8rem;
